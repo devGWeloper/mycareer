@@ -9,13 +9,13 @@ export type SectionCopy = {
   description?: string;
 };
 
-export type Kpi = {
-  value: number;
-  prefix?: string;
-  suffix: string;
-  plus?: boolean;
-  label: string;
+/** 메인 하단 경력 띠 한 칸: 역할을 크게, 아래에 디테일 */
+export type HeroStep = {
+  phase: string;
   tone: Tone;
+  role: string;
+  title: string;
+  note?: string;
 };
 
 export type LogEvent = {
@@ -79,7 +79,7 @@ export type CaseStudy = {
   code: string;
   tag: string;
   tone: Tone;
-  visual: "utilization" | "pipeline" | "rag";
+  visual: "utilization" | "pipeline" | "rag" | "replay";
   title: string;
   problem: string;
   actions: string[];
@@ -136,7 +136,7 @@ export type Resume = {
     client: string;
   };
   sections: Record<"competency" | "domain" | "career" | "results" | "lab" | "skills" | "contact", SectionCopy>;
-  kpis: Kpi[];
+  heroSteps: HeroStep[];
   events: LogEvent[];
   competencies: Competency[];
   domain: { nodes: DomainNode[]; facts: DomainFact[] };

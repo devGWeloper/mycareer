@@ -172,3 +172,63 @@ export function RagVisual() {
     </div>
   );
 }
+
+/* CASE 04 — Replay 테스트: 같은 설계서로 기존 실적(A)과 AI Tool 재개발(B) 비교 */
+const REPLAY_FLOW = ["후보 과제 등록", "적합도 상 · 중 · 하", "균형 선정", "Replay 측정"];
+const METRIC_GROUPS = [
+  { name: "생산성", count: 3, sub: "공수 절감률" },
+  { name: "경제성", count: 4, sub: "AI 비용 · 기능당 비용" },
+  { name: "품질", count: 2, sub: "결함률 · 사후 수정률" },
+];
+
+export function ReplayVisual() {
+  return (
+    <div className="rounded-xl border border-line2 bg-bg2/80 p-5 font-mono text-[11px]">
+      <div className="flex items-center justify-between text-muted">
+        <span className="tracking-[0.14em]">REPLAY TEST</span>
+        <span className="text-dim">개념도</span>
+      </div>
+
+      <div className="mt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+        <div className="rounded-lg border border-line2 bg-panel/80 px-3 py-2.5">
+          <p className="text-muted">A · 기존 실적</p>
+          <p className="mt-1 font-sans text-sm font-semibold text-fg2">AI Tool 미사용</p>
+        </div>
+        <div className="relative h-px w-10">
+          <span className="flow-x absolute inset-0 text-green/60" />
+          <span
+            className="travel-x absolute top-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-green shadow-[0_0_8px_#36d98e]"
+            style={{ "--dur": "1.4s" } as CSSProperties}
+          />
+        </div>
+        <div className="rounded-lg border border-green/40 bg-green/10 px-3 py-2.5">
+          <p className="text-green">B · Replay</p>
+          <p className="mt-1 font-sans text-sm font-semibold">Claude Code · Codex</p>
+        </div>
+      </div>
+      <p className="mt-2 text-center text-dim">같은 설계서 · 같은 테스트케이스</p>
+
+      <ol className="mt-5 grid grid-cols-2 gap-1.5 sm:grid-cols-4">
+        {REPLAY_FLOW.map((step, i) => (
+          <li key={step} className="grow-on-view rounded-md border border-line2 bg-panel/80 px-2 py-2 text-center">
+            <span className="text-dim">{String(i + 1).padStart(2, "0")}</span>
+            <p className="mt-0.5 font-sans text-[12px] text-fg2">{step}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div className="mt-5 grid grid-cols-3 gap-2">
+        {METRIC_GROUPS.map((g) => (
+          <div key={g.name} className="rounded-lg border border-green/25 bg-green/5 px-3 py-2.5">
+            <div className="flex items-baseline justify-between">
+              <span className="font-sans text-[13px] font-semibold">{g.name}</span>
+              <span className="text-lg font-semibold text-green">{g.count}</span>
+            </div>
+            <p className="mt-1 truncate font-sans text-[11px] text-muted">{g.sub}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-center text-fg2">→ 공수 · 비용 · 품질 9개 지표</p>
+    </div>
+  );
+}

@@ -1,7 +1,6 @@
 import { cacheLife } from "next/cache";
 import { ImageResponse } from "next/og";
 import { resume } from "@/data/resume";
-import type { Kpi } from "@/data/types";
 import { TONE } from "@/components/tone";
 
 // 링크 미리보기 카드 (LinkedIn · 카카오톡 등). 빌드 시 한 번 생성되는 정적 이미지
@@ -36,15 +35,10 @@ const C = {
   violet: TONE.violet.hex,
 };
 
-// 카드에 올릴 지표: FAB MES 연차 · EUV 가치 · Agent 사용자 · FTE
-const KPI_PICK = [0, 2, 3, 5];
-
-const kpiValue = (k: Kpi) => `${k.prefix ?? ""}${k.value.toLocaleString("en-US")}${k.plus ? "+" : ""}`;
 
 export default async function Image() {
   const [extraBold, medium, mono] = await loadFonts();
   const [line1, line2] = resume.headline.split("\n");
-  const kpis = KPI_PICK.map((i) => resume.kpis[i]);
 
   return new ImageResponse(
     (
@@ -148,29 +142,28 @@ export default async function Image() {
             </div>
           </div>
 
-          {/* 하단: 핵심 지표 */}
+          {/* 하단: 경력 띠 (메인 화면과 같은 데이터) */}
           <div style={{ display: "flex", gap: 14 }}>
-            {kpis.map((k) => {
-              const hex = TONE[k.tone].hex;
+            {resume.heroSteps.map((step) => {
+              const hex = TONE[step.tone].hex;
               return (
                 <div
-                  key={k.label}
+                  key={step.title}
                   style={{
                     display: "flex",
                     flexDirection: "column",
                     flex: 1,
-                    padding: "16px 20px",
+                    padding: "14px 18px 16px",
                     borderRadius: 14,
                     background: C.panel,
                     border: `1px solid ${C.line}`,
                     borderTop: `2px solid ${hex}`,
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-                    <span style={{ fontFamily: "Mono", fontSize: 34, color: hex, letterSpacing: -1 }}>{kpiValue(k)}</span>
-                    <span style={{ fontSize: 18, fontWeight: 800, color: hex }}>{k.suffix}</span>
-                  </div>
-                  <span style={{ marginTop: 4, fontSize: 16, color: C.fg2 }}>{k.label}</span>
+                  <span style={{ fontFamily: "Mono", fontSize: 11, letterSpacing: 2, color: hex, whiteSpace: "nowrap" }}>{step.phase}</span>
+                  <span style={{ marginTop: 6, fontSize: 28, fontWeight: 800, color: hex, letterSpacing: -0.5 }}>{step.role}</span>
+                  <span style={{ marginTop: 6, fontSize: 14, fontWeight: 800, color: C.fg, wordBreak: "keep-all" }}>{step.title}</span>
+                  {step.note && <span style={{ marginTop: 2, fontSize: 13, color: C.muted }}>{step.note}</span>}
                 </div>
               );
             })}

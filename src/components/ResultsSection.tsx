@@ -1,5 +1,5 @@
 import type { CaseStudy, SectionCopy } from "@/data/types";
-import { PipelineVisual, RagVisual, UtilizationVisual } from "./CaseVisuals";
+import { PipelineVisual, RagVisual, ReplayVisual, UtilizationVisual } from "./CaseVisuals";
 import { Container, SectionHeader } from "./SectionHeader";
 import { TONE } from "./tone";
 
@@ -7,6 +7,7 @@ const VISUALS = {
   utilization: UtilizationVisual,
   pipeline: PipelineVisual,
   rag: RagVisual,
+  replay: ReplayVisual,
 };
 
 function CaseCard({ item, flip }: { item: CaseStudy; flip: boolean }) {

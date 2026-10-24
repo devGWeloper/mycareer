@@ -1,5 +1,4 @@
 import type { Resume } from "@/data/types";
-import { CountUp } from "./CountUp";
 import { FabCanvas } from "./fab/FabCanvas";
 import { Accent } from "./SectionHeader";
 import { TONE } from "./tone";
@@ -44,7 +43,7 @@ export function Hero({ resume }: { resume: Resume }) {
         </div>
       </div>
 
-      <div aria-hidden className="fade-up absolute right-6 bottom-36 hidden gap-3 rounded-[10px] border border-line2 bg-panel/80 px-3 py-2 font-mono text-[10.5px] text-fg2 backdrop-blur lg:flex [--delay:2.4s]">
+      <div aria-hidden className="fade-up absolute right-6 bottom-52 hidden gap-3 rounded-[10px] border border-line2 bg-panel/80 px-3 py-2 font-mono text-[10.5px] text-fg2 backdrop-blur lg:flex [--delay:2.4s]">
         {LEGEND.map((l) => (
           <span key={l.label} className="flex items-center gap-1.5">
             <i className={`size-2 rounded-[2px] ${l.className}`} />
@@ -96,21 +95,22 @@ export function Hero({ resume }: { resume: Resume }) {
         </div>
       </div>
 
-      {/* KPI 스트립 */}
+      {/* 경력 띠: 단계별 역할 + 디테일 */}
       <div className="fade-up border-t border-line bg-bg/75 backdrop-blur-md [--delay:0.9s]">
-        <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-px bg-line sm:grid-cols-3 lg:grid-cols-6">
-          {resume.kpis.map((kpi) => (
-            <div key={kpi.label} className="bg-bg/85 px-4 py-5 sm:px-6">
-              <dt className="text-[11px] tracking-wide text-muted">{kpi.label}</dt>
-              <dd className={`mt-1.5 font-mono text-2xl font-semibold tracking-tight ${TONE[kpi.tone].text}`}>
-                {kpi.prefix}
-                <CountUp value={kpi.value} />
-                {kpi.plus && "+"}
-                <small className="ml-1 text-[11px] font-medium text-muted">{kpi.suffix}</small>
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <ol className="mx-auto grid max-w-6xl gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {resume.heroSteps.map((step) => {
+            const tone = TONE[step.tone];
+            return (
+              <li key={step.title} className="relative bg-bg/85 px-5 py-5 sm:px-6">
+                <span aria-hidden className={`absolute inset-x-0 top-0 h-px ${tone.dot} opacity-60`} />
+                <p className={`font-mono text-[10.5px] tracking-[0.16em] ${tone.text}`}>{step.phase}</p>
+                <p className={`mt-2 text-[1.6rem] leading-tight font-bold tracking-tight ${tone.text}`}>{step.role}</p>
+                <p className="mt-3 text-[15px] font-semibold">{step.title}</p>
+                {step.note && <p className="mt-0.5 text-xs text-muted">{step.note}</p>}
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

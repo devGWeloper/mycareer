@@ -71,13 +71,35 @@ export const resume: Resume = {
     },
   },
 
-  kpis: [
-    { value: 6, plus: true, suffix: "년", label: "FAB MES 구축 · 운영", tone: "cyan" },
-    { value: 27000, suffix: "장/년", label: "EUV 웨이퍼 추가 처리", tone: "amber" },
-    { value: 50, prefix: "≈", suffix: "억 원", label: "EUV 개선 연간 가치", tone: "amber" },
-    { value: 1000, plus: true, suffix: "명", label: "AI Agent 현장 사용자", tone: "violet" },
-    { value: 30000, plus: true, suffix: "건", label: "Agent 누적 요청", tone: "violet" },
-    { value: 20, suffix: "FTE", label: "연간 공수 절감", tone: "green" },
+  heroSteps: [
+    {
+      phase: "BUILD · OPERATE",
+      tone: "cyan",
+      role: "MES 개발자",
+      title: "반도체 FAB MES 구축 · 운영 6년+",
+      note: "SK hynix 양산 FAB",
+    },
+    {
+      phase: "OPERATE",
+      tone: "amber",
+      role: "SM 총괄(부)",
+      title: "MES 개발자 100명+ 표준 · 배포 총괄",
+      note: "24시간 FAB 장애 · 현장 VOC 대응",
+    },
+    {
+      phase: "TRANSFORM",
+      tone: "violet",
+      role: "AI Agent PL",
+      title: "제조 현장 엔지니어 1,500명+ 사용",
+      note: "누적 요청 50,000건+",
+    },
+    {
+      phase: "AI PRODUCTIVITY",
+      tone: "green",
+      role: "CoE장 · PMO",
+      title: "AI 생산성 PoC 전략 수립",
+      note: "생산성 측정 시스템 개발",
+    },
   ],
 
   events: [
@@ -92,7 +114,7 @@ export const resume: Resume = {
     { time: "2026.04", type: "RELEASE", message: "기준정보 가이드 Agent 베타 · 2개월 단축", tone: "violet" },
     { time: "2026.05", type: "RELEASE", message: "MES 실행 AI Agent 오픈 · 3개월 단축", tone: "violet" },
     { time: "2026 H2", type: "RELEASE", message: "MES Tool 프레임워크 구축 · Agent 공용 MES 실행 Tool 표준화", tone: "violet" },
-    { time: "NOW", type: "STATUS", message: "사용자 1,000+ · 누적 요청 30,000+ · 20 FTE/yr", tone: "green" },
+    { time: "NOW", type: "STATUS", message: "현장 엔지니어 1,500+ · 누적 요청 50,000+ · 20 FTE/yr", tone: "green" },
   ],
 
   competencies: [
@@ -287,9 +309,17 @@ export const resume: Resume = {
             "분리된 Layer 통합 모니터링 필요성 선제안 → 웹 구축, 필수 운용 프로그램으로 정착",
           ],
         },
+        {
+          label: "AI 생산성 CoE장 · PMO (병행)",
+          points: [
+            "SK AX 부문 단위 AI Tool 생산성 PoC의 CoE장 · PMO, 측정 전략 · 운영 체계 수립",
+            "고객사 DT 전략 조직과 주간 협의로 과제 선정 · 측정 기준 합의",
+            "과제 선정 · 생산성 측정 포털 직접 개발 (공수 · 비용 · 품질 9개 지표)",
+          ],
+        },
       ],
-      results: ["사용자 1,000명+", "누적 요청 30,000건+", "연간 20 FTE 절감", "전사 Agent 플랫폼 구독 2위", "제조기술 임원 · SK AX CEO 보고"],
-      tech: ["LangGraph", "LangChain", "RAG", "MCP", "FastMCP", "A2A", "FastAPI", "Next.js"],
+      results: ["현장 엔지니어 1,500명+", "누적 요청 50,000건+", "연간 20 FTE 절감", "전사 Agent 플랫폼 구독 2위", "제조기술 임원 · SK AX CEO 보고", "부문 AI 생산성 CoE장 · PMO"],
+      tech: ["LangGraph", "LangChain", "RAG", "MCP", "FastMCP", "A2A", "FastAPI", "Next.js", "Claude Code", "Codex"],
     },
   ],
 
@@ -332,8 +362,8 @@ export const resume: Resume = {
         "AI Tool 활용으로 8월 오픈 목표를 5월 초로 단축",
       ],
       metrics: [
-        { value: "1,000+", label: "현장 사용자" },
-        { value: "30,000+", label: "누적 요청" },
+        { value: "1,500+", label: "현장 엔지니어 사용자" },
+        { value: "50,000+", label: "누적 요청" },
         { value: "20 FTE", label: "연간 공수 절감" },
         { value: "구독 2위", label: "전사 Agent 플랫폼" },
       ],
@@ -355,6 +385,25 @@ export const resume: Resume = {
       metrics: [
         { value: "80+", label: "평가한 RAG 컬렉션" },
         { value: "-2개월", label: "베타 오픈 단축" },
+      ],
+    },
+    {
+      code: "CASE 04",
+      tag: "AI PRODUCTIVITY · CoE / PMO",
+      tone: "green",
+      visual: "replay",
+      title: "AI Tool 도입 효과를 측정하는 생산성 PoC 체계",
+      problem:
+        "고객사는 AI Tool 도입에 따른 DT 생산성 향상을 지표로 확인해야 했고, 과제 성격에 따라 AI 효과 편차가 커서 잘 맞는 과제만 고르면 효과가 과대평가될 수 있었습니다.",
+      actions: [
+        "SK AX 부문 AI 생산성 CoE장 · PMO로 측정 전략 수립, 고객사 DT 전략 조직과 주간 협의",
+        "Replay 테스트 설계: 완료된 과제의 기능을 같은 설계서로 AI Tool(Claude Code · Codex)을 써서 다시 개발해 기존 실적과 비교",
+        "과제 적합도 상 · 중 · 하 판정 후 유형이 고르게 섞이도록 선정해 과대평가 방지",
+        "과제 선정 · 측정 포털 직접 개발: AI 사용량 · 커밋 자동 수집, 공수 · 비용 · 품질 지표 산출",
+      ],
+      metrics: [
+        { value: "9개", label: "생산성 · 경제성 · 품질 지표" },
+        { value: "주 1회", label: "고객사 DT 전략 조직 협의" },
       ],
     },
   ],
