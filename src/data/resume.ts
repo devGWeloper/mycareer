@@ -10,7 +10,7 @@ export const resume: Resume = {
   headline: "제조 도메인 × AI Agent\n실전형 엔지니어",
   headlineAccent: "실전형 엔지니어",
   summary:
-    "SK hynix 반도체 FAB에서 6년간 MES 구축 · 운영을 수행했고, 현재 제조 AI Agent 프로젝트 PL을 맡고 있습니다. 제조 도메인 지식과 AI 기술을 연결해 현장에서 ‘진짜 쓰이는 AI’를 만듭니다.",
+    "제조 현장의 핵심 시스템인 MES를 SK hynix 양산 FAB에서 6년간 구축 · 운영했고, 현재 제조 AI Agent 프로젝트 PL을 맡고 있습니다. 제조 도메인 지식과 AI 기술을 연결해 현장에서 ‘진짜 쓰이는 AI’를 만듭니다.",
   email: "dkw9700@naver.com",
   github: "https://github.com/devGWeloper",
   company: {
@@ -31,10 +31,10 @@ export const resume: Resume = {
     domain: {
       index: "02",
       eyebrow: "MANUFACTURING DOMAIN",
-      title: "반도체 FAB MES 도메인 전문성",
-      accent: "FAB MES",
+      title: "제조 핵심 시스템 MES 도메인 전문성",
+      accent: "MES",
       description:
-        "1만 7천여 평 규모 양산 FAB의 MES를 구축부터 운영까지 수행했습니다. MES를 중심으로 반송 · 장비 · 스케줄링 · 품질 · 기준정보 시스템이 연동되는 구조와 데이터 흐름을 개발 · 운영 양쪽에서 다뤄 왔습니다.",
+        "MES는 공정 · 설비 · 물류 · 품질 데이터가 모이는 제조 실행의 중심 시스템입니다. 수천 개 공정 · 설비와 다수 시스템이 연동되는 반도체 양산 FAB에서 MES를 구축부터 운영까지 수행하며, 반송 · 장비 · 스케줄링 · 품질 · 기준정보 시스템과의 연동 구조와 데이터 흐름을 개발 · 운영 양쪽에서 다뤄 왔습니다.",
     },
     career: {
       index: "03",
@@ -76,7 +76,7 @@ export const resume: Resume = {
       phase: "BUILD · OPERATE",
       tone: "cyan",
       role: "MES 개발자",
-      title: "반도체 FAB MES 구축 · 운영 6년+",
+      title: "제조 MES 구축 · 운영 6년+",
       note: "SK hynix 양산 FAB",
     },
     {
@@ -84,7 +84,7 @@ export const resume: Resume = {
       tone: "amber",
       role: "SM 총괄(부)",
       title: "MES 개발자 100명+ 표준 · 배포 총괄",
-      note: "24시간 FAB 장애 · 현장 VOC 대응",
+      note: "24시간 생산 라인 장애 · 현장 VOC 대응",
     },
     {
       phase: "TRANSFORM",
@@ -179,8 +179,8 @@ export const resume: Resume = {
       },
       {
         value: "24/7",
-        label: "양산 FAB 장애 대응",
-        description: "24시간 가동 FAB 장애 대응, 모니터링 기반 오류 사전 감지 · 선제 조치",
+        label: "양산 라인 장애 대응",
+        description: "24시간 가동 양산 라인 장애 대응, 모니터링 기반 오류 사전 감지 · 선제 조치",
       },
       {
         value: "50+/일",
@@ -487,7 +487,7 @@ export const resume: Resume = {
     {
       code: "MFG",
       category: "Manufacturing",
-      items: ["반도체 FAB MES", "LotTracking · QTime · WIP 이벤트", "반송 · 장비 · 스케줄링 연계", "기준정보", "EUV 장비 시나리오", "24/7 장애 대응"],
+      items: ["제조 MES 구축 · 운영", "LotTracking · QTime · WIP 이벤트", "반송 · 장비 · 스케줄링 연계", "기준정보", "반도체 FAB · EUV 장비 시나리오", "24/7 장애 대응"],
     },
     {
       code: "AI",
