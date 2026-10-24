@@ -97,7 +97,7 @@ export const resume: Resume = {
       phase: "AI PRODUCTIVITY",
       tone: "green",
       role: "CoE장 · PMO",
-      title: "AI 생산성 PoC 전략 수립",
+      title: "AI 생산성 측정 전략 수립",
       note: "생산성 측정 시스템 개발",
     },
   ],
