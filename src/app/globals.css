@@ -1,0 +1,357 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #05080d;
+  --color-bg2: #080d15;
+  --color-panel: #0a1018;
+  --color-panel2: #0e1621;
+  --color-panel3: #121c29;
+  --color-line: rgb(140 175 220 / 0.08);
+  --color-line2: rgb(140 175 220 / 0.15);
+  --color-line3: rgb(140 175 220 / 0.24);
+  --color-fg: #e4ebf5;
+  --color-fg2: #b3c0d2;
+  --color-muted: #6f7e94;
+  --color-dim: #46536a;
+  --color-cyan: #3ee0ff;
+  --color-violet: #a98bff;
+  --color-amber: #ffb020;
+  --color-green: #36d98e;
+  --color-red: #ff4d5e;
+  --color-blue: #4d8dff;
+}
+
+@theme inline {
+  --font-sans:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+::selection {
+  background: rgb(62 224 255 / 0.25);
+}
+
+@utility bg-blueprint {
+  background-image:
+    linear-gradient(rgb(140 175 220 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(140 175 220 / 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@utility text-gradient {
+  background: linear-gradient(100deg, var(--color-cyan), var(--color-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 흐르는 점선: 데이터가 이동하는 연결선 */
+@utility flow-x {
+  background: repeating-linear-gradient(90deg, currentColor 0 6px, transparent 6px 14px);
+  background-size: 14px 100%;
+  animation: flow-x 0.9s linear infinite;
+}
+
+@utility flow-y {
+  background: repeating-linear-gradient(180deg, currentColor 0 6px, transparent 6px 14px);
+  background-size: 100% 14px;
+  animation: flow-y 0.9s linear infinite;
+}
+
+@keyframes flow-x {
+  to {
+    background-position: 14px 0;
+  }
+}
+
+@keyframes flow-y {
+  to {
+    background-position: 0 14px;
+  }
+}
+
+@keyframes live {
+  0% {
+    box-shadow: 0 0 0 0 rgb(54 217 142 / 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgb(54 217 142 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(54 217 142 / 0);
+  }
+}
+
+.dot-live {
+  background: var(--color-green);
+  animation: live 2s infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 70s linear infinite;
+}
+
+.marquee-wrap:hover .marquee {
+  animation-play-state: paused;
+}
+
+/* 허브 → 노드로 이동하는 데이터 패킷 (SVG 사용자 좌표 기준) */
+@keyframes packet {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+}
+
+.packet {
+  animation: packet var(--dur, 2.6s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes travel-x {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes travel-y {
+  from {
+    top: 0%;
+  }
+  to {
+    top: 100%;
+  }
+}
+
+.travel-x {
+  animation: travel-x var(--dur, 1.6s) cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.travel-y {
+  animation: travel-y var(--dur, 1.6s) cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: spin-slow 40s linear infinite;
+}
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* 스크롤에 맞춰 그려지는 선 */
+@keyframes draw-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* 세로 선은 scaleY 대신 clip-path로 — 박스 크기가 그대로여야 자기 view() 타임라인이 흔들리지 않는다 */
+@keyframes wipe-y {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes draw-stroke {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes rail-head {
+  0% {
+    top: 0%;
+    opacity: 0;
+    color: var(--from);
+  }
+  8%,
+  92% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+    color: var(--to);
+  }
+}
+
+@keyframes node-on {
+  from {
+    background-color: var(--color-bg);
+    border-color: var(--color-line3);
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+/* 레일 끝 발광점은 스크롤 애니메이션이 있을 때만 보인다 */
+.rail-head {
+  opacity: 0;
+  background: currentColor;
+  box-shadow: 0 0 12px 3px currentColor;
+}
+
+/* 스크롤 진입 시 나타나기 — 지원 브라우저에서만 (그 외에는 그냥 보임) */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+
+    .grow-on-view {
+      transform-origin: left;
+      animation: grow-x linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
+
+    .draw-x {
+      transform-origin: left;
+      animation: draw-x linear both;
+      animation-timeline: view();
+      animation-range: cover 8% cover 30%;
+    }
+
+    /* 선 끝이 화면 위에서 40% 지점(플레이헤드)을 따라 내려간다 */
+    .draw-y {
+      animation: wipe-y linear both;
+      animation-timeline: view();
+      animation-range: cover 60vh cover calc(100% - 40vh);
+    }
+
+    .map-scope {
+      view-timeline: --map block;
+    }
+
+    .draw-stroke {
+      animation: draw-stroke ease-out both;
+      animation-timeline: --map;
+      animation-range: entry 25% cover 45%;
+    }
+
+    /* 경력 레일: 단계(li)마다 노드 → 다음 노드 구간을 플레이헤드에 맞춰 채운다 */
+    .rail-scope {
+      view-timeline: --step block;
+    }
+
+    .rail-fill {
+      animation: wipe-y linear both;
+      animation-timeline: --step;
+      animation-range: cover calc(60vh + var(--rail-top)) cover calc(100% - 40vh + var(--rail-top));
+    }
+
+    .rail-head {
+      animation: rail-head linear both;
+      animation-timeline: --step;
+      animation-range: cover calc(60vh + var(--rail-top)) cover calc(100% - 40vh + var(--rail-top));
+    }
+
+    .node-on {
+      animation: node-on linear both;
+      animation-timeline: --step;
+      animation-range: cover calc(60vh + var(--rail-top) - 32px) cover calc(60vh + var(--rail-top));
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee,
+  .dot-live,
+  .fade-up,
+  .spin-slow,
+  .flow-x,
+  .flow-y {
+    animation: none !important;
+  }
+
+  .packet,
+  .travel-x,
+  .travel-y {
+    display: none;
+  }
+}
